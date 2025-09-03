@@ -17,16 +17,12 @@ if [ "$EUID" -ne 0 ]; then
     exit 0
 fi
 
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-RESET=$(tput sgr0)
-
 # For example:
 #    OLLAMA_ORIGINS="*"
 #    OLLAMA_ORIGINS="http://192.168.1.*"
 #    OLLAMA_ORIGINS="http://192.168.1.100"
 #    OLLAMA_ORIGINS="http://192.168.1.100, http://192.168.1.101"
-OLLAMA_ORIGINS="http://192.168.1.*"
+OLLAMA_ORIGINS="http://192.168.88.*"
 OLLAMA_HOST="http://0.0.0.0:11434"
 
 env_vars=(
@@ -34,10 +30,10 @@ env_vars=(
     "Environment=\"OLLAMA_HOST=$OLLAMA_HOST\""
 )
 
-cd /etc/systemd/system || { echo "${RED}Failed to change directory${RESET}"; exit 1; }
+cd /etc/systemd/system || { echo "Error: Failed to change directory"; exit 1; }
 
 if [ ! -f ollama.service ]; then
-    echo "${RED}Error: ollama.service not found${RESET}"
+    echo "Error: ollama.service not found."
     exit 1
 fi
 
@@ -52,5 +48,4 @@ for env_var in "${env_vars[@]}"; do
 done
 
 sudo systemctl daemon-reload && sudo systemctl restart ollama.service
-echo "${GREEN}Ollama service restarted${RESET}"
-
+echo "Ollama service restarted"
