@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# # This script update the OLLAMA and run setting environment script.
+#
+# 1. WARNING! Before first run define the OLLAMA_BIN and CORS_SCRIPT
+#    variable with the appropriate value.
+# 2. WARNING! Ensure you have root privileges!
+# 3. Place the script in /opt/
+# 4. Use crontab -e to add the following cron job:
+#    30 1 * * * export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && /opt/update_ollama.sh
+
 
 LOG_FILE="/tmp/ollama_update.log"
 OLLAMA_BIN="/usr/local/bin/ollama"
